@@ -30,8 +30,8 @@
 *.app
 
 
-Visual Studio Stuff:
-/code/Debug/*
-/code/*/Debug/*
-/code/.vs/*
-/code/*/vs/*
+# Visual Studio Stuff:
+# /code/Debug/*
+# /code/*/Debug/*
+# /code/.vs/*
+# /code/*/vs/*
