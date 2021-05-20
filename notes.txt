@@ -1,0 +1,59 @@
+Derek's Space Station Game Idea:
+- base building space station
+- in-depth tech tree
+  - reverse-engineer stuff
+- different starting traits
+  - complete randomization (with weights towards boring, bad stuff) or manual customization (only boring, bad stuff)
+  - brain, cardiovascular, metabolism, arms/legs, skeleton
+  - brains (skills)
+      - biological - low talent, high aptitude, stress from ugly
+      - digital  - high talent, low aptitude, stress from pretty
+      - analog (expert mode) - high talent, high aptitude, stress from everything, manually increase skills (with soldering iron)
+  - cardiovascular (vitality & stamina)
+      - biological - high healing, low vitality and medium stamina
+      - mechanical - very low healing (manual maintenence), medium vitality and high stamina
+      - synthetic - high healing, very low vitality, and high stamina
+  - metabolism (food, poison)
+      - mostly random
+      - biological - tends towards organic material, high poison risk, high poison recovery, hunger increases passively
+      - mechanical - tends towards inorganic material, low poison risk, low poison recovery, hunger mostly increase with actions
+      - ferrous - exclusively inorganic material, very low poison risk, no poison recovery, hunger increase with actions
+      - locust - can eat anything, very high poison risk, very high poison recovery, hunger passively increases very rapidly
+  - arms/legs (movement, strength)
+      - mechanical (more energy, more performance) or biological (less energy, less performance)
+      - frog (very high mobility, very low strength, high energy consumption with actions)
+      - kangaroo (high mobility, medium strength, medium energy consumption)
+      - gorilla (low mobility, very high strength, high energy consumptions)
+      - human (medium mobility, medium strength, low energy consumption)
+      - milipede (medium mobility, low strength, low energy consumption)
+      - slug (very low mobility, low strength, medium energy consumption)
+  - skeleton (charisma, cosmetics)
+      - calcium - high charisma, 
+      - robotic endoskeleton - low charisma,
+      - slimy insectoid exoskeleton - very low charisma,
+      - no skeleton - very high charisma
+  - starting skills (grows proportional to aptitude, with exponential decay)
+  - aptitudes (very hard to change - gacha [normal variation, randomly selected from it. Also takes a lot of research/resources])
+  - talent (hard to change - gacha)
+  - skill barriers on items/research, talent controls success
+- crafting
+  - element-based?
+- magic
+- make a lot of it procedurally generated
+  - procedural weapons
+  - procedural materials
+- include:
+  - fishing minigame
+  - knife sharpening system
+- 2.5D
+
+Challenges:
+- asteroids
+- hostile alien life
+  - ai-controlled dopplegangers
+- alien remnants
+- personal health
+  - thirst, hunger, scurvy, stress
+- station health
+  - temp, O2, nuclear
+- random events
