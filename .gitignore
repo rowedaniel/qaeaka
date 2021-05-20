@@ -31,7 +31,7 @@
 
 
 # Visual Studio Stuff:
-/code/Debug/*
-/code/*/Debug/*
+# /code/Debug/*
+# /code/*/*/Debug/*
 /code/.vs/*
 /code/*/vs/*
