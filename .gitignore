@@ -28,3 +28,10 @@
 *.exe
 *.out
 *.app
+
+
+Visual Studio Stuff:
+/code/Debug/*
+/code/*/Debug/*
+/code/.vs/*
+/code/*/vs/*
