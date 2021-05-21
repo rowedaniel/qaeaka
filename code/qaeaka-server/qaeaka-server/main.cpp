@@ -13,7 +13,7 @@ int main(int argc, char** argv[])
 	if (socket.bind(53000) != sf::Socket::Done)
 	{
 		std::cout << "Error starting server." << std::endl;
-		return;
+		return 0;
 	}
 
 
