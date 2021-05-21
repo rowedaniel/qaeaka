@@ -1,0 +1,29 @@
+-Tiles
+
+--Materials
+---Material ID for each tile, corresponds to image file in assets & location on properties table
+
+--Custom structures (i.e. center of ship, anything that fits the place of a tile but is not editable or has custom art)
+
+-Entities
+
+--Player
+---Player's skills, organs & inventory
+
+--NPCs
+---NPC dialogue options, sprite & inventory
+
+--Enemies
+---sprite, stats & drop table
+
+
+-Objects
+
+--Crafting stations
+---Ideas: furnace & workbench (obvious), chemical refinery, sewing machine, nanolathe, regular lathe
+
+--Furniture
+---Just for decoration, helps w/stress stat. Either no function or rudimentary function
+
+--Misc.
+---anything with important functions, i.e. power generation (solar panels, turbines), chests
