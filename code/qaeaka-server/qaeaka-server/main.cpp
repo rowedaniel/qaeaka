@@ -17,16 +17,28 @@ int main(int argc, char** argv[])
 	}
 
 
-	/*
-	char in[size]
+	
+	char in[128];
 	std::size_t received;
-	sf::IpAddress
-	unsigned short senderPort
-	if (socket.receive(in, sizeof(in), received, sender, senderPort) != sf::Socket::Done) 
-	{ 
-		// error 
+	sf::IpAddress sender;
+	unsigned short senderPort;
+
+	while (true) {
+		if (socket.receive(in, sizeof(in), received, sender, senderPort) != sf::Socket::Done)
+		{
+			std::cout << "Error recieving message." << std::endl;
+			return 0;
+		}
+		std::cout << "Message recieved from " << sender << ": \"" << in << "\"" << std::endl;
+
+
+
+
+		if (socket.send(in, sizeof(in), sender, senderPort) != sf::Socket::Done) {
+			std::cout << "Error sending message." << std::endl;
+			return 0;
+		}
 	}
-	*/
 
 
 
