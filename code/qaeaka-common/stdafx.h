@@ -6,5 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <list>
 
 #include <SFML/Network.hpp>
+#include <SFML/Graphics.hpp>

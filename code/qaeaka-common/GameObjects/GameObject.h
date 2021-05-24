@@ -1,5 +1,5 @@
 #pragma once
+#include "../stdafx.h"
 
-class GameObject {
-
+class GameObject : public sf::Transformable {
 };

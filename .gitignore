@@ -33,7 +33,6 @@
 # Visual Studio Stuff:
 /code/Debug/*
 /code/*/*/Debug/*
-/code/.vs/*
 /code/*/vs/*
 /code/x32/*
 /code/x64/*

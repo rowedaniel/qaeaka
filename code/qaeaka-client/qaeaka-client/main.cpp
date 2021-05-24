@@ -1,9 +1,14 @@
 #include "stdafx.h"
+#include "GameManager.h"
 
 int main(int argc, char** argv[])
 {
 	std::cout << "Starting client." << std::endl;
 
+	GameManager::run_until_finished();
+
+
+	/*
 	sf::IpAddress server("131.191.92.153");
 	int port = 53000;
 
@@ -35,6 +40,7 @@ int main(int argc, char** argv[])
 		}
 		std::cout << "Message recieved from " << sender << ": \"" << in << "\"" << std::endl;
 	}
+	*/
 
 	return 0;
 }
