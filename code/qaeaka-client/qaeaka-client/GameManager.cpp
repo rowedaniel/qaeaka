@@ -17,7 +17,14 @@ void GameManager::run_until_finished()
 	// load tiles from server
 	
 	// TODO: put this somewhere better
-	sf::IpAddress serverAddress("131.191.92.153");
+
+	sf::IpAddress serverAddress;
+	do
+	{
+		std::cout << "Type the address or name of the server to connect to: ";
+		std::cin >> serverAddress;
+	} while (serverAddress == sf::IpAddress::None);
+	std::cout << "Connecting to: " << serverAddress << std::endl;
 	int serverPort = 53000;
 
 	sf::UdpSocket socket;
