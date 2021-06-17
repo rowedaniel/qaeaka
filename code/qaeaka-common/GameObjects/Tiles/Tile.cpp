@@ -7,7 +7,7 @@ Tile::Tile()
 
 Tile::Tile(int x, int y)
 {
-	updatePos(x, y);
+	update_pos(x, y);
 }
 
 Tile::~Tile()
@@ -20,7 +20,7 @@ Tile::GridPos Tile::getGridPos()
 	return gridPos;
 }
 
-void Tile::updatePos(int x, int y)
+void Tile::update_pos(int x, int y)
 {
 	gridPos.x = x;
 	gridPos.y = y;

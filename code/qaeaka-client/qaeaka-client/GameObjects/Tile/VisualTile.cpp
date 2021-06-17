@@ -8,7 +8,7 @@ VisualTile::VisualTile(std::string imgfile, int x, int y) : Tile(x, y)
 		std::cout << "Error loading from file: " << imgfile << std::endl;
 	}
 	texture.setSmooth(true);
-	sprite = sf::Sprite(texture, sf::IntRect(0, 0, 128, 128));
+	sprite = sf::Sprite(texture, sf::IntRect(0, 0, (int)edgeSize*2, (int)edgeSize*2));
 	sprite.setPosition(Tile::getPosition());
 }
 

@@ -21,16 +21,20 @@
   <ItemGroup>
     <ClInclude Include="..\..\qaeaka-common\GameObjects\GameObject.h" />
     <ClInclude Include="..\..\qaeaka-common\GameObjects\GridManager.h" />
+    <ClInclude Include="..\..\qaeaka-common\GameObjects\Tiles\Element.h" />
     <ClInclude Include="..\..\qaeaka-common\GameObjects\Tiles\Tile.h" />
     <ClInclude Include="..\..\qaeaka-common\NetworkManager.h" />
     <ClInclude Include="..\..\qaeaka-common\stdafx.h" />
+    <ClInclude Include="ServerNetworkManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\qaeaka-common\GameObjects\GridManager.cpp" />
+    <ClCompile Include="..\..\qaeaka-common\GameObjects\Tiles\Element.cpp" />
     <ClCompile Include="..\..\qaeaka-common\GameObjects\Tiles\Tile.cpp" />
     <ClCompile Include="..\..\qaeaka-common\NetworkManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ServerNetworkManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

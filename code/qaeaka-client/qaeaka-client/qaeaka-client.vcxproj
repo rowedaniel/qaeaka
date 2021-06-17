@@ -134,7 +134,9 @@
     <ClInclude Include="..\..\qaeaka-common\GameObjects\GameObject.h" />
     <ClInclude Include="..\..\qaeaka-common\GameObjects\GridManager.h" />
     <ClInclude Include="..\..\qaeaka-common\GameObjects\Tiles\Tile.h" />
+    <ClInclude Include="..\..\qaeaka-common\NetworkManager.h" />
     <ClInclude Include="..\..\qaeaka-common\stdafx.h" />
+    <ClInclude Include="ClientNetworkManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObjects\Tile\VisualTile.h" />
     <ClInclude Include="GameObjects\VisualGameObject.h" />
@@ -143,6 +145,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\qaeaka-common\GameObjects\GridManager.cpp" />
     <ClCompile Include="..\..\qaeaka-common\GameObjects\Tiles\Tile.cpp" />
+    <ClCompile Include="..\..\qaeaka-common\NetworkManager.cpp" />
+    <ClCompile Include="ClientNetworkManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObjects\Tile\VisualTile.cpp" />
     <ClCompile Include="main.cpp" />

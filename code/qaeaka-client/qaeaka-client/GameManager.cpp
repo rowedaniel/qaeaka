@@ -12,63 +12,10 @@ void GameManager::run_until_finished()
 	// deactivate OpenGl context for the main thread (whatever that means)
 	window.setActive(false);
 
+	networkManager.send_packet(ClientNetworkManager::ClientJoinGame);
+	networkManager.receive_packet();
 
 	
-	// load tiles from server
-	
-	// TODO: put this somewhere better
-
-	sf::IpAddress serverAddress;
-	do
-	{
-		std::cout << "Type the address or name of the server to connect to: ";
-		std::cin >> serverAddress;
-	} while (serverAddress == sf::IpAddress::None);
-	std::cout << "Connecting to: " << serverAddress << std::endl;
-	int serverPort = 53000;
-
-	sf::UdpSocket socket;
-
-	sf::Packet incomingPacket;
-	sf::IpAddress senderAddress;
-	unsigned short senderPort;
-
-	enum ClientRequest { JoinGame = sf::Uint16(1) };
-	enum ServerRequest {  };
-	ClientRequest serverResponse;
-	int intServerResponse;
-
-	// send signal to server that we started the game
-	sf::Packet outgoingPacket;
-	sf::Uint16 testJoinGame = 1;
-	outgoingPacket << testJoinGame;//ClientRequest::JoinGame;
-	socket.send(outgoingPacket, serverAddress, serverPort);
-	socket.receive(incomingPacket, senderAddress, senderPort);
-	if (incomingPacket >> intServerResponse) {
-		serverResponse = static_cast<ClientRequest>(intServerResponse);
-		std::cout << "Packet received: " << serverResponse << std::endl;
-		switch (serverResponse) {
-		case ClientRequest::JoinGame:
-		{
-			sf::Uint16 numberOfTiles;
-			incomingPacket >> numberOfTiles;
-			tiles.reserve(numberOfTiles);
-			sf::Uint16 x, y;
-			for (int i = 0; i < numberOfTiles; ++i) {
-				incomingPacket >> x;
-				incomingPacket >> y;
-				std::cout << "Creating new tile at x=" << x << ", y=" << y << std::endl;
-				tiles.emplace_back("devtile.png", x, y);
-			}
-			break;
-		}
-		}
-	}
-	else {
-		// error receiving packet
-		std::cout << "Error receiving packet from: " << senderAddress << ", port: " << senderPort << std::endl;
-	}
-
 
 
 	// launch rendering thread
@@ -144,4 +91,5 @@ sf::RenderWindow GameManager::window;
 sf::RenderTexture GameManager::postProcessingTexture;
 sf::Color GameManager::defaultColor = sf::Color::Black;
 
+ClientNetworkManager GameManager::networkManager;
 std::vector<VisualTile> GameManager::tiles;

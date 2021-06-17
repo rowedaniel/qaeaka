@@ -1,11 +1,14 @@
 #pragma once
 #include "stdafx.h"
+#include "ClientNetworkManager.h"
 #include "GameObjects/Tile/VisualTile.h"
 
 class GameManager
 {
 public:
 	static void run_until_finished();
+
+	static std::vector<VisualTile> tiles;
 
 private:
 	static int windowWidth;
@@ -16,7 +19,7 @@ private:
 
 	static sf::Color defaultColor;
 
-	static std::vector<VisualTile> tiles;
+	static ClientNetworkManager networkManager;
 
 	static void renderingThread();
 	static void logicThread();

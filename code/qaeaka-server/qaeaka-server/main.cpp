@@ -26,7 +26,7 @@ int main(int argc, char** argv[])
 	sf::IpAddress senderAddress;
 	unsigned short senderPort;
 
-	enum ClientRequest { JoinGame = sf::Uint16(1) }; 
+	enum ClientRequest { JoinGame = (sf::Uint16)1 }; 
 	enum ServerRequest {  };
 	ClientRequest clientRequest;
 	sf::Uint16 intClientRequests;
@@ -34,6 +34,7 @@ int main(int argc, char** argv[])
 	while (true) {
 		socket.receive(incomingPacket, senderAddress, senderPort);
 		if (incomingPacket >> intClientRequests) {
+			std::cout << "Packet received: " << intClientRequests << std::endl;
 			clientRequest = static_cast<ClientRequest>(intClientRequests);
 			std::cout << "Packet received: " << clientRequest << std::endl;
 			switch (clientRequest)
@@ -41,18 +42,19 @@ int main(int argc, char** argv[])
 			case ClientRequest::JoinGame:
 			{
 				sf::Packet outgoingPacket;
-				outgoingPacket << clientRequest;
-				sf::Uint16 size = gridmanager.tiles.size();
+				outgoingPacket << (sf::Uint16)clientRequest;
+				sf::Uint16 size = (sf::Uint16)gridmanager.tiles.size();
 				outgoingPacket << size;
 
 				std::cout << "Sending: " << size << " tiles:" << std::endl;
-
+				
 				for (auto it : gridmanager.tiles) {
 					Tile::GridPos pos = it->getGridPos();
-					sf::Int16 x = pos.x;
-					sf::Int16 y = pos.y;
-					std::cout << "x: " << x << " y: " << y << std::endl;;
-					outgoingPacket << x << y;
+					sf::Uint16 x = pos.x;
+					sf::Uint16 y = pos.y;
+					std::cout << "Sending tile, x: " << x << " y: " << y << std::endl;
+					outgoingPacket << x;
+					outgoingPacket << y;
 				}
 				socket.send(outgoingPacket, senderAddress, senderPort);
 				break;
