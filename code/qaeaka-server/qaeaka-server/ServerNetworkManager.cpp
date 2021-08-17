@@ -1,11 +1,15 @@
 #include "ServerNetworkManager.h"
 
-ServerNetworkManager::ServerNetworkManager()
+ServerNetworkManager::ServerNetworkManager(GridManager * GM) : NetworkManager()
 {
+	// set all the important links
+	gridManager = GM;
+
 	// Listen to messages on port 53000
 	if (socket.bind(serverPort) != sf::Socket::Done)
 	{
 		std::cout << "Error starting server." << std::endl;
+		return;
 	}
 }
 
@@ -37,7 +41,7 @@ void ServerNetworkManager::handle_request(Request request, sf::IpAddress senderA
 	switch (request) {
 	case Request::ClientJoinGame:
 	{
-		//add_client(senderAddress, senderPort)
+		std::cout << "Recieved ClientJoinGame request!" << std::endl;
 		send_packet(Request::ClientJoinGame, senderAddress, senderPort);
 	}
 	default:
@@ -51,5 +55,16 @@ void ServerNetworkManager::handle_request(Request request, sf::IpAddress senderA
 
 void ServerNetworkManager::send_ClientJoinGame(sf::Packet & outgoingPacket)
 {
-	return;
+	sf::Uint16 size = (sf::Uint16)gridManager->tiles.size();
+	outgoingPacket << size;
+
+	std::cout << "Sending: " << size << " tiles:" << std::endl;
+
+	for (auto it : gridManager->tiles) {
+		Tile::GridPos pos = it->getGridPos();
+		sf::Uint16 x = pos.x;
+		sf::Uint16 y = pos.y;
+		outgoingPacket << x;
+		outgoingPacket << y;
+	}
 }

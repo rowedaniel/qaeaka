@@ -1,25 +1,30 @@
 #include "GameManager.h"
 
+
+
+
+GameManager::GameManager() : networkManager( new ClientNetworkManager(this) ), graphicsManager( new GraphicsManager(this) )
+{
+}
+
 void GameManager::run_until_finished()
 {
 
-	window.create(sf::VideoMode(windowWidth, windowHeight, 32), "Qaeaka");
-	// setup post processing texture
-	if (!postProcessingTexture.create(windowWidth, windowHeight)) {
-		// error
+	graphicsManager->create_window();
+
+
+
+	networkManager->send_packet(ClientNetworkManager::ClientJoinGame);
+	while (tiles.size() == 0) {
+		networkManager->receive_packet();
 	}
-
-	// deactivate OpenGl context for the main thread (whatever that means)
-	window.setActive(false);
-
-	networkManager.send_packet(ClientNetworkManager::ClientJoinGame);
-	networkManager.receive_packet();
 
 	
 
 
+
 	// launch rendering thread
-	sf::Thread thread(&GameManager::renderingThread);
+	sf::Thread thread(&GameManager::renderingThread, this);
 	thread.launch();
 
 	// logic thread stays part of this thread
@@ -30,44 +35,23 @@ void GameManager::run_until_finished()
 
 void GameManager::renderingThread()
 {
-	// activate OpenGl context for only this thread (I think)
-	window.setActive(true);
+	graphicsManager->activateWindow();
 
 	// main render loop
-	while (window.isOpen()) {
+	while (graphicsManager->isOpen()) {
 		// TODO: add timing to this
-		draw();
-		window.display();
+		graphicsManager->draw();
 	}
 }
 
 void GameManager::logicThread()
 {
-	while (window.isOpen()) {
+	while (graphicsManager->isOpen()) {
 		logic();
 		events();
 	}
 }
 
-void GameManager::draw()
-{
-	// clear the screen
-	postProcessingTexture.clear(defaultColor);
-
-	// draw sprites
-	for (auto it = tiles.begin(); it != tiles.end(); ++it) {
-		it->draw(postProcessingTexture);
-	}
-
-	// update freshly drawn sprites
-	postProcessingTexture.display();
-
-
-	// push the post processing texture to the actual screen
-	const sf::Texture & texture = postProcessingTexture.getTexture();
-	sf::Sprite sprite(texture);
-	window.draw(sprite);
-}
 
 void GameManager::logic()
 {
@@ -76,14 +60,23 @@ void GameManager::logic()
 void GameManager::events()
 {
 	sf::Event event;
-	while (window.pollEvent(event)) {
-		if (event.type == sf::Event::Closed) {
-			window.close();
+	while (graphicsManager->pollEvent(event)) {
+		switch (event.type) {
+		case(sf::Event::Closed):
+		{
+			graphicsManager->close();
+			break;
+		}
+		case(sf::Event::Resized):
+		{
+			graphicsManager->update_window_size(event.size.width, event.size.height);
+			break;
+		}
 		}
 	}
 }
 
-
+/*
 // C++ quirk: static member vars have to be instantiated here
 int GameManager::windowWidth = 800;
 int GameManager::windowHeight = 800;
@@ -93,3 +86,4 @@ sf::Color GameManager::defaultColor = sf::Color::Black;
 
 ClientNetworkManager GameManager::networkManager;
 std::vector<VisualTile> GameManager::tiles;
+*/

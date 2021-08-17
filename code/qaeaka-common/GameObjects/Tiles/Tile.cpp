@@ -20,6 +20,27 @@ Tile::GridPos Tile::getGridPos()
 	return gridPos;
 }
 
+bool Tile::has_element(Element::ID id)
+{
+	for (auto it : elements) {
+		if (it->get_id() == id) {
+			return true;
+		}
+	}
+	return false;
+}
+
+Element * Tile::get_element(Element::ID id)
+{
+	for (auto it : elements) {
+		if (it->get_id() == id) {
+			return it;
+		}
+	}
+	// error: element not found
+	return *elements.begin();
+}
+
 void Tile::update_pos(int x, int y)
 {
 	gridPos.x = x;

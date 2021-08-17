@@ -1,14 +1,23 @@
 #include "ClientNetworkManager.h"
 #include "GameManager.h"
 
-ClientNetworkManager::ClientNetworkManager()
+/*ClientNetworkManager::ClientNetworkManager()
 {
+}*/
+
+ClientNetworkManager::ClientNetworkManager(GameManager * GM) : NetworkManager()
+{
+	gameManager = GM;
 	do
 	{
-		std::cout << "Type the address or name of the server to connect to: ";
-		std::cin >> serverAddress;
+
+		// DEBUG: just set it to localhost by default
+		//std::cout << "Type the address or name of the server to connect to: ";
+		//std::cin >> serverAddress;
+		serverAddress = sf::IpAddress("127.0.0.1");
 	} while (serverAddress == sf::IpAddress::None);
 	std::cout << "Connecting to: " << serverAddress << std::endl;
+	
 }
 
 void ClientNetworkManager::send_packet(Request request)
@@ -25,7 +34,7 @@ void ClientNetworkManager::send_packet(Request request)
 		break;
 	default:
 		// error
-		std::cout << "Error sending packet to " << serverAddress << ", port: " << serverPort << std::endl;
+		std::cout << "Error sending packet to " << serverAddress << ", port: " << serverPort << ": Bad request." << std::endl;
 		break;
 	}
 
@@ -45,14 +54,14 @@ void ClientNetworkManager::handle_request(Request request, sf::IpAddress senderA
 		std::cout << "Building " << numberOfTiles << " tiles." << std::endl;
 
 		
-		GameManager::tiles.reserve(numberOfTiles);
+		gameManager->tiles.reserve(numberOfTiles);
 		for (int i = 0; i < numberOfTiles; ++i) {
 			sf::Uint16 x;
 			sf::Uint16 y;
 			incomingPacket >> x;
 			incomingPacket >> y;
 			std::cout << "Creating new tile at x=" << x << ", y=" << y << std::endl;
-			GameManager::tiles.emplace_back("../../../devtile.png", x, y);
+			gameManager->tiles.push_back(new VisualTile("../../../devtile.png", x, y));
 		}
 		break;
 	}
@@ -68,3 +77,5 @@ void ClientNetworkManager::send_ClientJoinGame(sf::Packet & outgoingPacket)
 {
 	return;
 }
+/*
+*/

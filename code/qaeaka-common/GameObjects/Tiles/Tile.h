@@ -1,5 +1,6 @@
 #pragma once
 #include "../GameObject.h"
+#include "Element.h"
 
 class Tile : public GameObject
 {
@@ -13,6 +14,14 @@ public:
 		int y;
 	};
 	GridPos getGridPos();
+
+	bool has_element(Element::ID id);
+	Element* get_element(Element::ID id);
+
+	std::list<Element*> elements;
+	std::vector<Tile*> neighbors;
+
+	const float volume = 100.0f; // in Liters
 
 protected:
 	const float edgeSize = 128.0f;

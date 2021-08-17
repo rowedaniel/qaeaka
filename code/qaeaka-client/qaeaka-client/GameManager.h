@@ -2,30 +2,27 @@
 #include "stdafx.h"
 #include "ClientNetworkManager.h"
 #include "GameObjects/Tile/VisualTile.h"
+#include "GraphicsManager.h"
 
 class GameManager
 {
 public:
-	static void run_until_finished();
+	GameManager();
+	
+	void run_until_finished();
 
-	static std::vector<VisualTile> tiles;
+	std::vector<VisualTile*> tiles;
+
+	void renderingThread();
+	void logicThread();
 
 private:
-	static int windowWidth;
-	static int windowHeight;
 
-	static sf::RenderWindow window;
-	static sf::RenderTexture postProcessingTexture;
+	ClientNetworkManager * networkManager;
 
-	static sf::Color defaultColor;
+	GraphicsManager * graphicsManager;
 
-	static ClientNetworkManager networkManager;
-
-	static void renderingThread();
-	static void logicThread();
-
-	static void logic();
-	static void events();
-	static void draw();
-
+	void logic();
+	void events();
+	/**/
 };
