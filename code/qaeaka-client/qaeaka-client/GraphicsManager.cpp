@@ -7,7 +7,7 @@ GraphicsManager::GraphicsManager(GameManager * GM)
 {
 	gameManager = GM;
 
-	view.reset(sf::FloatRect(50.0f, 50.0f, (float)windowWidth, (float)windowHeight));
+	view.reset(sf::FloatRect(0.0f, 0.0f, (float)windowWidth, (float)windowHeight));
 	view.setRotation(0.0f);
 }
 
@@ -26,7 +26,7 @@ void GraphicsManager::create_window()
 {
 	window.create( sf::VideoMode(windowWidth, windowHeight, 32), "Qaeaka");
 	// setup post processing texture
-	if (!postProcessingTexture.create(windowWidth, windowHeight)) {
+	if (!postProcessingTexture.create(windowWidth*1.0f, windowHeight)) {
 		// error
 	}
 
