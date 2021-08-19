@@ -24,5 +24,9 @@ private:
 
 	void logic();
 	void events();
+
+	sf::Clock renderingClock;
+	sf::Clock logicClock;
+
 	/**/
 };

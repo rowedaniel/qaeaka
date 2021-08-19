@@ -38,9 +38,16 @@ void GameManager::renderingThread()
 	graphicsManager->activateWindow();
 
 	// main render loop
+	renderingClock.restart();
 	while (graphicsManager->isOpen()) {
-		// TODO: add timing to this
-		graphicsManager->draw();
+		sf::Time elapsedTime = renderingClock.getElapsedTime();
+		// TODO: make this timing better
+		// the framerate is hardcoded
+		// don't bother rendering if no time has passed
+		if (elapsedTime.asMilliseconds() < 16) { continue; }
+
+		graphicsManager->draw(renderingClock.getElapsedTime());
+		renderingClock.restart();
 	}
 }
 
@@ -70,6 +77,24 @@ void GameManager::events()
 		case(sf::Event::Resized):
 		{
 			graphicsManager->update_window_size(event.size.width, event.size.height);
+			break;
+		}
+		case(sf::Event::KeyPressed):
+		{
+			switch (event.key.code) {
+			case(sf::Keyboard::Q):
+			{
+				// rotate screen to the left
+				graphicsManager->rotateBy(60);
+				break;
+			}
+			case(sf::Keyboard::E):
+			{
+				// rotate screen to the right
+				graphicsManager->rotateBy(-60);
+				break;
+			}
+			}
 			break;
 		}
 		}
